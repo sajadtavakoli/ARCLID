@@ -11,6 +11,6 @@ ARCLID is a deep learning–based structural variant caller that leverages long-
 
 ## 🚀 Installation
 ```bash
-git clone https://github.com/<your-username>/ARCLID.git
+git clone https://github.com/sajadtavakoli/ARCLID.git
 cd ARCLID
 pip install -r requirements.txt
