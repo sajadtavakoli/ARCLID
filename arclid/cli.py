@@ -1,6 +1,10 @@
 import argparse
+
 from .core.pipeline import run_arclid
 from .version import __version__
+import torch.multiprocessing as mp
+import pysam
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -17,18 +21,48 @@ def main():
     parser.add_argument('--fast', type=int, default=1, help='fast mode is faster, but likely a bit drop in accuracy (default: 1, 1->fast, 0->slow)')
     
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
-
     args = parser.parse_args()
+
+    aln_path=args.aln_path
+    ref_path=args.ref_path
+    out_path=args.out_path
+    cov=args.coverage
+    threads=args.threads
+    sample=args.sample
+    contigs=args.contigs
+    fast=args.fast
+
+    aln = pysam.AlignmentFile(aln_path)
+    all_contigs = aln.references
+    all_lengths = aln.lengths
+
+    if contigs=='all':
+        contigs = all_contigs
+        lengths = all_lengths
+    else: 
+        contigs = contigs.split(',')
+        lengths = []
+        for idx, contig in enumerate(all_contigs):
+            if contig in contigs:
+                lengths.append(all_lengths[idx])
+    aln.close()
+
+
+
     run_arclid(
-        aln_path=args.aln_path,
-        ref_path=args.ref_path,
-        vcf_path=args.out_path,
-        cov=args.coverage
-        threads=args.threads,
-        sample=args.sample
-        contigs=args.contigs,
-        fast=args.fast,
+        aln_path=aln_path,
+        ref_path=ref_path,
+        out_path=out_path,
+        cov=cov,
+        threads=threads,
+        sample=sample,
+        contigs=contigs,
+        lengths=lengths,
+        fast=fast,
     )
 
+
+
 if __name__ == "__main__":
+    mp.set_start_method("spawn", force=True)
     main()
