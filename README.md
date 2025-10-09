@@ -1,3 +1,7 @@
+
+![arclid logo_1200dpi](https://github.com/user-attachments/assets/8bf0d1d1-5c65-478e-b6ec-9bdaf3bfc088)
+
+
 # ARCLID
 **Accurate and Robust Characterization of Long Insertions and Deletions**
 
