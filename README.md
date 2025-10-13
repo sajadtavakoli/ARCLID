@@ -1,7 +1,6 @@
 # ARCLID
-**Accurate and Robust Characterization of Long Insertions and Deletions**
-
-ARCLID is a deep learning–based structural variant caller that leverages long-read pileup images for accurate SV detection and genotyping.
+**ARCLID: Accurate and Robust Characterization of Long Insertions and Deletions**
+accurate detection of genomic structural variants (SVs) remains challenging, especially for large variants and at low sequencing coverage. Here, we introduce ARCLID, a novel deep learning-based SV caller for PacBio HiFi data that treats SVs as objects within pileup images. Evaluated across diverse real and synthetic datasets at varying coverage levels, ARCLID exhibits reliable and consistent accuracy, even for SVs larger than 1 kbp. Notably, it maintains high performance on samples with lower sequencing depths (e.g., 10× and 5×). This ability to preserve accuracy at reduced depths offers a substantial practical advantage for cost-constrained projects, facilitating robust SV discovery without requiring deep sequencing. Overall, ARCLID represents a promising step toward more accessible and efficient long-read SV analysis in diverse research applications. 
 
 ![arclid logo](https://github.com/user-attachments/assets/d4df95d0-7226-483f-aa41-ea73e7bb40ad)
 
@@ -9,9 +8,11 @@ ARCLID is a deep learning–based structural variant caller that leverages long-
 
 ## 🧭 Features
 - Detects insertions and deletions using YOLOv11x deep learning
+- Maintains high accuracy even at low sequencing coverage  
+- High accuracy for large SVs
 - This version works only with PacBio HiFi 
 - Supports GPU acceleration and multiprocessing
-- Achieves high accuracy even at low sequencing coverage
+
 
 ## 🚀 Installation
 ```bash
