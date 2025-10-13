@@ -17,9 +17,8 @@ ARCLID is a deep learning-based tool for detecting large genomic structural vari
 
 ## 🚀 Installation
 ```bash
-git clone https://github.com/sajadtavakoli/ARCLID.git
-cd ARCLID
-pip install -r requirements.txt
+pip install "git+https://github.com/sajadtavakoli/ARCLID.git"
+
 ```
 
 ## 🧩 Usage
