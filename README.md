@@ -1,5 +1,6 @@
 # ARCLID
 **ARCLID: Accurate and Robust Characterization of Long Insertions and Deletions**
+
 ARCLID is a deep learning-based tool for detecting large genomic structural variants in PacBio HiFi data, excelling at low coverage (5×-10×). It reduces sequencing costs, aiding medical research, agriculture, conservation, and global scientific equity by enabling accessible variant discovery. 
 
 ![arclid logo](https://github.com/user-attachments/assets/d4df95d0-7226-483f-aa41-ea73e7bb40ad)
