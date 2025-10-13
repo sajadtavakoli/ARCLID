@@ -8,7 +8,7 @@ ARCLID is a deep learning–based structural variant caller that leverages long-
 
 ## 🧭 Features
 - Detects insertions and deletions using YOLOv11x deep learning
-- Works with PacBio HiFi 
+- This version works only with PacBio HiFi 
 - Supports GPU acceleration and multiprocessing
 - Achieves high accuracy even at low sequencing coverage
 
