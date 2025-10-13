@@ -21,7 +21,7 @@ cd ARCLID
 pip install -r requirements.txt
 ```
 
-## Usage
+## 🧩 Usage
 ### Quick usage
 ```bash
 arclid -a aln.bam -r ref.fa -o output.vcf -c 10
