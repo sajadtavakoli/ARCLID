@@ -6,16 +6,6 @@ ARCLID is a deep learning–based structural variant caller that leverages long-
 ![arclid logo](https://github.com/user-attachments/assets/d4df95d0-7226-483f-aa41-ea73e7bb40ad)
 
 
-| Section      | Suggested icon |
-| ------------ | -------------- |
-| Features     | 🧭             |
-| Installation | 🚀             |
-| Usage        | 🧬             |
-| Citation     | 🧾             |
-| License      | ⚖️             |
-| Contact      | 📬             |
-
-
 
 ## 🧭 Features
 - Detects insertions and deletions using YOLOv11x deep learning
