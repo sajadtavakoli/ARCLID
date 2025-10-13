@@ -42,3 +42,13 @@ arclid \
     --fast 1 # fast mode is faster, but likely a bit drop in accuracy (default: 1, 1->fast, 0->slow)
 ``` 
 
+| Flag                  | Name                | Type  | Default  | Description                                                                                    |
+| --------------------- | ------------------- | ----- | -------- | ---------------------------------------------------------------------------------------------- |
+| `-a`, `--aln_path`    | Alignment file path | `str` | —        | Path to input alignment file (`.bam` or `.cram`)                                               |
+| `-r`, `--ref_path`    | Reference file path | `str` | —        | Path to reference genome file (`.fa`)                                                          |
+| `-o`, `--out_path`    | Output file path    | `str` | —        | Path to output VCF file (`.vcf`)                                                               |
+| `-c`, `--coverage`    | Sample coverage     | `int` | —        | Sequencing coverage (e.g., `10` for 10×)                                                       |
+| `-s`, `--sample_name` | Sample name         | `str` | `SAMPLE` | Name of the sample used for labeling output                                                    |
+| `-t`, `--threads`     | Threads             | `int` | `4`      | Number of CPU threads to use                                                                   |
+| `--contigs`           | Contigs of interest | `str` | `all`    | Comma-separated list of contigs (e.g., `chr1,chr2`)                                            |
+| `--fast`              | Fast mode           | `int` | `1`      | Enables fast mode (1 = fast, 0 = slow). Fast mode runs quicker with a slight drop in accuracy. |
