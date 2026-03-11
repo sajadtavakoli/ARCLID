@@ -72,7 +72,7 @@ def run_arclid(aln_path, ref_path, out_path, cov, threads, sample, contigs, leng
 
     # Start GPU worker (single persistent)
     gpu_p = ctx.Process(target=gpu_worker,
-                        args=(load_model, DEVICE_ID, (n_imgs_5k, n_imgs_50k), shm_names, status, 
+                        args=(DEVICE_ID, (n_imgs_5k, n_imgs_50k), shm_names, status, 
                               ready_events, done_events, ext_var_meta, pred_meta))
     gpu_p.start()
 
