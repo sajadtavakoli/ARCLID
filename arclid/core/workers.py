@@ -126,7 +126,7 @@ def cpu_worker_fast(worker_id, user_inputs, n_imgs, shm_name, status_arr, ready_
         pos_temp = 0
 
         # find the segment in contig for this thread
-        length = lengths[lengths.index(contig)]
+        length = lengths[contigs.index(contig)]
         portion = length//threads
         contig_start = worker_id*portion
         contig_end = (worker_id+1)*portion
