@@ -219,10 +219,10 @@ def cpu_worker_fast(worker_id, user_inputs, n_imgs, shm_name, status_arr, ready_
                     pos_starts.append(start + pos) # the last line of code (06-10-2025)
                     pos = pos + CUT_SIZE_SMALL - CUT_OVERLAP
                 
-                img = cv2.resize(img, (W, H))
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # BGR image
-                img = np.ascontiguousarray(img.transpose(2, 0, 1)) # WHC to CWH
-                batch.append(img)
+                img50k = cv2.resize(img, (W, H))
+                img50k = cv2.cvtColor(img50k, cv2.COLOR_BGR2RGB) # BGR image
+                img50k = np.ascontiguousarray(img50k.transpose(2, 0, 1)) # WHC to CWH
+                batch.append(img50k)
                 pos_starts.append(start)
                 
                 batch = np.array(batch, dtype=np.uint8)
