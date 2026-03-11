@@ -112,7 +112,7 @@ def filter_var2(region, sv_type, sv_gt, sv_length, conf, cov,
     run_len = max(1, int(thresh_flag_len * sv_length))
 
     H, W = region2d.shape
-    print(f'H={H}, W={W}, sv_length={sv_length}, cov={cov}, thresh_flag_len={thresh_flag_len}, thresh_flag_cov={thresh_flag_cov}')
+    #print(f'H={H}, W={W}, sv_length={sv_length}, cov={cov}, thresh_flag_len={thresh_flag_len}, thresh_flag_cov={thresh_flag_cov}')
     if run_len > W:
         # No window can fit; immediately fail the length criterion
         flag_count = 0
@@ -177,7 +177,7 @@ def postprocessing(img, img_seq, variants, start, end, thresh_flag_len=0.7, thre
         elif sv_type=='INS':
             sv_region = img[150:, reg_start: reg_end, :]
 
-        print(f'img.shape={img.shape}, img_seq.shape={img_seq.shape}, reg_start={reg_start}, reg_end={reg_end}')
+        #print(f'img.shape={img.shape}, img_seq.shape={img_seq.shape}, reg_start={reg_start}, reg_end={reg_end}')
         cov = np.mean(img_seq[0, reg_start: reg_end])
         #time_filter_var0 = time.time()
         is_real_var, flag_count = filter_var2(sv_region, sv_type, sv_gt, lng, conf, cov, thresh_flag_len=thresh_flag_len, thresh_flag_cov=thresh_flag_cov)
