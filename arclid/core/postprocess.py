@@ -112,6 +112,7 @@ def filter_var2(region, sv_type, sv_gt, sv_length, conf, cov,
     run_len = max(1, int(thresh_flag_len * sv_length))
 
     H, W = region2d.shape
+    print(f'H={H}, W={W}, sv_length={sv_length}, cov={cov}, thresh_flag_len={thresh_flag_len}, thresh_flag_cov={thresh_flag_cov}')
     if run_len > W:
         # No window can fit; immediately fail the length criterion
         flag_count = 0
