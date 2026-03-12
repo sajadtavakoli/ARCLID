@@ -231,21 +231,19 @@ def extract_variants(preds, chrom, pos_starts, org_size):
     return SVs
         
 
-def parse_chromes(SVs_list):
-    chromes = [str(chrom) for chrom in np.arange(1, 23)]
-    chromes.extend(['X', 'Y'])
+def parse_chromes(SVs_list, contigs):
     chrom_SVs = []
-    for chrom in chromes:
+    for contig in contigs:
         temp_SVs = []
         for sv in SVs_list:
-            if sv[0] == chrom:
+            if sv[0] == contig:
                 temp_SVs.append(sv)
         chrom_SVs.append(temp_SVs)
     return chrom_SVs
 
 
-def sort_SVs(SVs_list):
-    chrom_SVs = parse_chromes(SVs_list)
+def sort_SVs(SVs_list, contigs):
+    chrom_SVs = parse_chromes(SVs_list, contigs)
     sorted_SVs = []
     for chrom_sv in chrom_SVs:
         chrom_sv.sort(key=lambda v: v[1])
@@ -263,8 +261,8 @@ def apply_length_thresh(SVs, length_threshold, cut_size):
         return [sv for sv in SVs if sv[3]>length_threshold]
     
 
-def stitch_vars(sorted_SVs, distance=100):
-    chrom_sorted_SVs = parse_chromes(sorted_SVs)
+def stitch_vars(sorted_SVs, contigs, distance=100):
+    chrom_sorted_SVs = parse_chromes(sorted_SVs, contigs)
     stitched_SVs = []
     for chrom_SVs in chrom_sorted_SVs:
         stitched_flags = [False] * len(chrom_SVs)
