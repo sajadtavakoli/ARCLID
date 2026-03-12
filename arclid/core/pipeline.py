@@ -107,7 +107,7 @@ def run_arclid(aln_path, ref_path, out_path, cov, threads, sample, contigs, leng
             pass
 
     
-    SVs_saved_paths = joblib.joblib("SVs_*.joblib")
+    SVs_saved_paths = gb.glob("SVs_*.joblib")
     SVs_all = []
     for SV_path in SVs_saved_paths:
         SVs_all.extend(joblib.load(SV_path))
