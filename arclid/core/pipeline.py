@@ -13,6 +13,7 @@ from .model_loader import load_model
 
 import pysam 
 import joblib
+import glob as gb
 
 
 
@@ -104,5 +105,23 @@ def run_arclid(aln_path, ref_path, out_path, cov, threads, sample, contigs, leng
             shm.unlink()
         except FileNotFoundError:
             pass
+
+    
+    SVs_saved_paths = joblib.joblib("SVs_*.joblib")
+    SVs_all = []
+    for SV_path in SVs_saved_paths:
+        SVs_all.extend(joblib.load(SV_path))
+
+    SVs_all = sort_SVs(SVs_all, contigs)
+    SVs_no_ovl = remove_overlap(SVs_all, contigs, overlap_thresh=0.75)
+    
+    SVs_IDflag = apply_IDflag_thresh(SVs_no_ovl, thresh=0.05)
+    SVs_IDflag = sort_SVs(SVs_IDflag, contigs)
+
+    SVs_stitch = stitch_vars(SVs_IDflag, contigs, conf_thresh=0.0)
+
+    # ----- Create vcf file -----
+
+
     
 
