@@ -330,6 +330,46 @@ def create_vcf(variants, dest_path, gtruth_path, sample):
     vcf_out.close()
 
 
+
+def remove_overlap(sorted_SVs, contigs, overlap_thresh=0.1):
+    #sorted_SVs = filter_vars(sorted_SVs, 0)
+    chrom_sorted_SVs = parse_chromes(sorted_SVs, contigs)
+    selected_SVs = []
+    for chrom_SVs in chrom_sorted_SVs:
+        selected_flags = [False] * len(chrom_SVs)
+        for i, sv1 in enumerate(chrom_SVs):
+            if selected_flags[i]:
+                continue
+            for j in range(i+1, len(chrom_SVs)):
+                sv2 = chrom_SVs[j]
+
+                if sv1[5]!=sv2[5] :
+                    # break
+                    continue
+                
+                sv1_s, sv1_e, sv1_len = sv1[1], sv1[2], sv1[3]
+                sv2_s, sv2_e, sv2_len = sv2[1], sv2[2], sv2[3]
+
+                if sv2_s >= sv1_e:
+                    continue
+                start_max = max(sv1_s, sv2_s)
+                end_min = min(sv1_e, sv2_e)
+                len_max = max(sv1_len, sv2_len)
+                overlap = abs(end_min - start_max)
+                if overlap < overlap_thresh * len_max:
+                    continue
+                else:
+                    sv1_conf, sv2_conf = sv1[4], sv2[4]
+                    if sv1_conf < sv2_conf:
+                        sv1 = sv2.copy()  
+                
+                    selected_flags[j] = True
+                
+            selected_SVs.append(sv1)
+    return selected_SVs
+
+
+
 def run_truvari():
     pass
 
