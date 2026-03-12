@@ -370,6 +370,20 @@ def remove_overlap(sorted_SVs, contigs, overlap_thresh=0.1):
 
 
 
+def apply_IDflag_thresh(SVs, thresh):
+    SVs_new = []
+    for var in SVs:
+        if len(var)==7:
+            SVs_new.append(var)
+            continue
+        cov = var[7]
+        flag_sup = var[8]
+        if flag_sup > round(thresh*cov):
+            SVs_new.append(var)
+    return SVs_new
+
+
+
 def run_truvari():
     pass
 
