@@ -120,7 +120,9 @@ def run_arclid(aln_path, ref_path, out_path, cov, threads, sample, contigs, leng
 
     SVs_stitch = stitch_vars(SVs_IDflag, contigs, conf_thresh=0.0)
 
+    
     # ----- Create vcf file -----
+    create_vcf(SVs_stitch, contigs, lengths, ref_path.split('/')[-1], sample, out_path)
 
 
     
