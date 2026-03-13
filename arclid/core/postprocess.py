@@ -384,6 +384,57 @@ def apply_IDflag_thresh(SVs, thresh):
 
 
 
+
+
+def create_vcf(variants, contigs, lengths, ref_name, sample, vcf_path):
+
+    header = pysam.VariantHeader()
+    header.add_meta("fileformat", value="VCFv4.2")
+    header.add_meta("source", value="ARCLID")
+    header.add_meta("reference", value=ref_name)
+
+    for i in range(len(contigs)):
+        header.contigs.add(contigs[i], length=lengths[i])
+    
+
+    header.add_meta("ALT", items=[("ID", "DEL"), ("Description", "Deletion")])
+    header.add_meta("INFO", items=[("ID", "SVTYPE"), ("Number", 1), ("Type", "String"),
+                                ("Description", "Type of structural variant")])
+    header.add_meta("INFO", items=[("ID", "SVLEN"), ("Number", 1), ("Type", "Integer"),
+                                ("Description", "Length of structural variant")])
+    header.add_meta("INFO", items=[("ID", "END"), ("Number", 1), ("Type", "Integer"),
+                                ("Description", "End position")])
+    header.add_meta("FORMAT", items=[("ID", "GT"), ("Number", 1), ("Type", "String"),
+                                    ("Description", "Genotype")])
+
+    header.add_sample(sample)
+
+    vcf_out = pysam.VariantFile(vcf_path, 'w', header=header)
+
+    predicted_variants = [{'chrom': var[0], "start": var[1], "end": var[2] if var[5]=='DEL' else var[1], "svtype": var[5], 
+                  "length": -var[3] if var[5]=='DEL' else var[3], "gt": var[6], "conf": var[4]}
+                  for var in variants
+                  ]
+    
+    for variant in predicted_variants:
+        record = vcf_out.new_record(
+            contig= variant["chrom"],
+            start= variant["start"] - 1,  # VCF uses 0-based indexing
+            stop= variant["end"],
+            id = variant['svtype'], 
+            alleles=("N", "<{}>".format(variant["svtype"])),
+            filter='PASS',
+            qual=variant["conf"],
+            info={"SVTYPE": variant["svtype"], "SVLEN": variant["length"]},
+            #samples={"HG002": {"GT": tuple(map(int, variant["gt"].split('/')))}}
+        )
+        record.samples[sample]['GT'] = tuple(map(int, variant['gt'].split("/")))
+
+        vcf_out.write(record)
+    vcf_out.close()
+
+
+
 def run_truvari():
     pass
 
