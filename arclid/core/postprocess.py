@@ -299,36 +299,6 @@ def stitch_vars(sorted_SVs, contigs, distance=100):
 
 
 
-def create_vcf(variants, dest_path, gtruth_path, sample):
-    sample = sample
-    predicted_vcf_path = dest_path
-    gtruth_vcf_path = gtruth_path
-
-    gtruth_vcf = pysam.VariantFile(gtruth_vcf_path)
-    vcf_out = pysam.VariantFile(predicted_vcf_path, 'w', header=gtruth_vcf.header)
-
-    predicted_variants = [{'chrom': var[0], "start": var[1], "end": var[2], "svtype": var[5], 
-                  "length": -var[3] if var[5]=='DEL' else var[3], "gt": var[-1], "conf": var[4]}
-                  for var in variants
-                  ]
-    
-    for variant in predicted_variants:
-        record = vcf_out.new_record(
-            contig= variant["chrom"],
-            start= variant["start"] - 1,  # VCF uses 0-based indexing
-            stop= variant["end"],
-            id = variant['svtype'], 
-            alleles=("N", "<{}>".format(variant["svtype"])),
-            filter='PASS',
-            qual=variant["conf"],
-            info={"SVTYPE": variant["svtype"], "SVLEN": variant["length"]},
-            #samples={"HG002": {"GT": tuple(map(int, variant["gt"].split('/')))}}
-        )
-        record.samples[sample]['GT'] = tuple(map(int, variant['gt'].split("/")))
-
-        vcf_out.write(record)
-    vcf_out.close()
-
 
 
 def remove_overlap(sorted_SVs, contigs, overlap_thresh=0.1):
