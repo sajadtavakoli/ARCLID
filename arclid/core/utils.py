@@ -142,7 +142,6 @@ cv2.setNumThreads(0)
 
 import os
 import pysam 
-import pyfaidx
 import glob as gb  
 import numpy as np
 
