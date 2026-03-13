@@ -1,6 +1,6 @@
+joblib
 torch>=2.0
 ultralytics>=8.0
 numpy
 opencv-python
 pysam
-joblib
