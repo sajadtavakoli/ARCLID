@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "torch>=2.0",
+  "torch==2.1.1",
   "ultralytics==8.3.58",
   "numpy",
   "opencv-python",
