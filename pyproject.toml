@@ -21,10 +21,10 @@ classifiers = [
 ]
 
 dependencies = [
-  "torch>=2.1",
-  "ultralytics==8.3.58",
   "numpy==1.26.4",
   "opencv-python",
+  "torch>=2.1",
+  "ultralytics==8.3.58",
   "pysam",
   "joblib",
 ]
