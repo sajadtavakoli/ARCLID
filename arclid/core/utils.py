@@ -326,7 +326,7 @@ def find_insertions(cigar_tuple, seq_with_ins, qs_with_ins, mq, split_sup_strand
 # @jit
 def seq2num(seq):
     #trans_table = str.maketrans('NnAaTtCcGg', '0022334455') 
-    trans_table = str.maketrans('NnVvKkBbMmWwSsRrYyAaTtCcGg', '00000000000000000022334455') # 'M' was added to handle 'M' in chromosome 3
+    trans_table = str.maketrans('NnVvKkBbMmWwSsRrYyHhAaTtCcGg', '0000000000000000000022334455') # 'M' was added to handle 'M' in chromosome 3
     seq_num = np.array(list(seq.translate(trans_table)), dtype=np.uint8)
     seq_num = rescale_255(seq_num)
     # np.int8 can store number less than <=127, otherwise, it will overwrite
