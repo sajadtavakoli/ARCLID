@@ -165,7 +165,9 @@ def cpu_worker_fast(worker_id, user_inputs, n_imgs, shm_name, status_arr, ready_
                 end = start + img_window
                 pos_temp = end - img_margin_right
                 
-                ref_seq = seq2num(str(ref.fetch(contig, start=start, end=end))) # load ref_seq and convert to digits
+                #ref_seq = seq2num(str(ref.fetch(contig, start=start, end=end))) # load ref_seq and convert to digits
+                ref_seq = str(ref.fetch(contig, start=start, end=end))
+                ref_seq = np.array(list(ref_seq.upper().encode('ascii')))
 
                 reads_info = []
                 reads_window = aln_window.fetch(contig, start, end)
